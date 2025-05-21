@@ -1,98 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dasari Group</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        .bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.4;
-            filter: blur(70px);
-            z-index: -1;
-        }
-        
-        .bg-shape-1 {
-            width: 300px;
-            height: 300px;
-            background: #c7d2fe;
-            top: -100px;
-            left: -100px;
-        }
-        
-        .bg-shape-2 {
-            width: 400px;
-            height: 400px;
-            background: #bae6fd;
-            bottom: -150px;
-            right: -150px;
-        }
-        
-        .bg-shape-3 {
-            width: 250px;
-            height: 250px;
-            background: #fecdd3;
-            top: 40%;
-            right: 15%;
-        }
-        
-        .spreadsheet-container {
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            backdrop-filter: blur(8px);
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .spreadsheet-container:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-    <!-- Background shapes -->
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
-    <div class="bg-shape bg-shape-3"></div>
+`html
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f4f8;
+    }
     
-    <div class="min-h-screen flex flex-col items-center px-4 py-12 md:py-16 relative">
-        <div class="w-full max-w-5xl">
-            <!-- Title Section -->
-            <div class="text-center mb-8 md:mb-12">
-                <h1 class="text-3xl md:text-4xl font-semibold text-gray-800 mb-2">Dasari Group</h1>
-                <p class="text-gray-600 max-w-2xl mx-auto">Always Contact For Stock Status And Warranty Status </p>
-            </div>
-            
-            <!-- Spreadsheet Container -->
-            <div class="spreadsheet-container rounded-xl overflow-hidden w-full">
-                <!-- Replace the src with your actual Google Spreadsheet embed URL -->
-                <div class="relative w-full" style="padding-top: 56.25%;">
-                    <iframe 
-                        class="absolute inset-0 w-full h-full"
-                        src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQPR9tBvKoVYRgaM4C0JjgwDTMQMsgKxNKqIKAx7egZ9kRVxiXmgP4vn_wF-7nEsA/pubhtml?widget=true&amp;headers=false"
-                        frameborder="0"
-                        allowfullscreen>
-                    </iframe>
+    .warranty-active {
+        background-color: #d1fae5;
+        color: #065f46;
+    }
+    
+    .warranty-expired {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+</style>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Product 1 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Premium Laptop Pro</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: LP-2023-XPS</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Jan 15, 2023</p>
                 </div>
             </div>
             
-            <!-- Footer Note -->
-            <div class="mt-6 text-center text-sm text-gray-500">
+            <!-- Product 2 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Wireless Headphones</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: WH-1000X</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Mar 22, 2023</p>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Smart Watch Elite</h2>
+                        <span class="warranty-expired text-sm font-medium px-3 py-1 rounded-full">Expired</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: SW-42-PRO</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Nov 5, 2021</p>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">4K Ultra HD TV</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: TV-4K-65</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Jul 18, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Digital Camera</h2>
+                        <span class="warranty-expired text-sm font-medium px-3 py-1 rounded-full">Expired</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: DC-X100</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Feb 3, 2020</p>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Bluetooth Speaker</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: BS-500</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Sep 12, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Gaming Console</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: GC-5000</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Dec 25, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Coffee Maker</h2>
+                        <span class="warranty-expired text-sm font-medium px-3 py-1 rounded-full">Expired</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: CM-Deluxe</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: May 7, 2020</p>
+                </div>
+            </div>
+            
+            <!-- Product 9 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Wireless Router</h2>
+                        <span class="warranty-active text-sm font-medium px-3 py-1 rounded-full">Active</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: WR-AX6000</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Oct 30, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Product 10 -->
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800">Fitness Tracker</h2>
+                        <span class="warranty-expired text-sm font-medium px-3 py-1 rounded-full">Expired</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Model: FT-Pulse</p>
+                    <p class="text-gray-500 text-xs mt-2">Purchased: Jun 14, 2021</p>
+                </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 px-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p class="text-sm">This is a product information display only. No e-commerce functionality is included.</p>
+            <p class="text-xs text-gray-400 mt-2">© 2023 Product Warranty Tracker</p>
+        </div>
+    </footer>
+</div>
