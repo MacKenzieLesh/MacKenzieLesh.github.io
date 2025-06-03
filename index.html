@@ -1,299 +1,263 @@
-<!DOCTYPE html> 
-<html lang="en"> 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset=”UTF-8-> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Dasari Group</title> 
-    <script src="https://cdn.tailwindcss.com"></script> 
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <style> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Information Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        
         body {
-            font-family: 'Poppins', sans-serif; 
-            background-color: #f8fafc; 
-            background-image: 
-                radial-gradient(circle at 25px 25px, rgba(255, 255, 255, 0.2) 2%, transparent 0%), 
-                radial-gradient(circle at 75px 75px, rgba(255, 255, 255, 0.2) 2%, transparent 0%); 
-            background-size: 100px 100px; 
-            position: relative; 
-            overflow-x: hidden; 
-    } 
-
-    body::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 500px;
-        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        transform: skewY(-6deg);
-        transform-origin: top left;
-        z-index: -1;
-    }
-    
-    .product-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        backdrop-filter: blur(5px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-    
-    .warranty-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        border-radius: 9999px;
-        padding: 4px 12px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.025em;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    }
-    
-    .warranty-active {
-        background-color: #10b981;
-        color: white;
-    }
-    
-    .warranty-inactive {
-        background-color: #f87171;
-        color: white;
-    }
-    
-    .validity-tag {
-        display: inline-block;
-        padding: 2px 8px;
-        border-radius: 4px;
-        font-size: 0.7rem;
-        font-weight: 500;
-        margin-bottom: 8px;
-    }
-    
-    .validity-active {
-        background-color: rgba(16, 185, 129, 0.1);
-        color: #10b981;
-        border: 1px solid rgba(16, 185, 129, 0.2);
-    }
-    
-    .validity-inactive {
-        background-color: rgba(248, 113, 113, 0.1);
-        color: #f87171;
-        border: 1px solid rgba(248, 113, 113, 0.2);
-    }
-    
-    .floating-circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-        z-index: -1;
-    }
-    
-    .circle-1 {
-        width: 300px;
-        height: 300px;
-        background-color: #8b5cf6;
-        top: 10%;
-        right: -100px;
-    }
-    
-    .circle-2 {
-        width: 200px;
-        height: 200px;
-        background-color: #6366f1;
-        bottom: 5%;
-        left: -50px;
-    }
-    
-    .circle-3 {
-        width: 150px;
-        height: 150px;
-        background-color: #10b981;
-        top: 40%;
-        left: 10%;
-    }
-    
-    .header-content {
-        position: relative;
-        z-index: 10;
-    }
-    
-    .product-grid {
-        position: relative;
-        z-index: 10;
-    }
-</style>
-<div class="container mx-auto px-4 py-12 max-w-7xl">
-    <header class="mb-16 text-center header-content">
-        <h1 class="text-4xl font-bold text-white mb-3">Dasari Group</h1>
-        <p class="text-indigo-100 max-w-2xl mx-auto">Always Contact For Stock Availability </p>
-    </header>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 product-grid">
-        <!-- Product 1 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                <img src="https://cdn.dribbble.com/userupload/42998490/file/original-2dac74748f46615ec86ac4996af67acb.jpg" alt="DO" width="600" height="600">
-             <path d="M19 7h-3V5.5A2.5 2.5 0 0013.5 3h-3A2.5 2.5 0 008 5.5V7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2zm-9-1.5a.5.5 0 01.5-.5h3a.5.5 0 01.5.5V7h-4V5.5zM19 18H5V9h14v9z"></path>
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fa;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .product-table th {
+            position: sticky;
+            top: 0;
+            background-color: #f8fafc;
+            z-index: 10;
+        }
+        
+        .product-row:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .account-premium {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+        
+        .account-standard {
+            background-color: #e2e8f0;
+            color: #475569;
+        }
+        
+        .account-basic {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+        
+        .header-banner {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Main Header Banner -->
+        <header class="header-banner">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-2">Product Information Tracker</h1>
+                <p class="text-lg opacity-90 max-w-2xl mx-auto">Keep track of all your products and their warranty information in one place</p>
             </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">DO $200 COUPON</h3>
-                <div class="validity-tag validity-active">Validity: 12 months</div>
-                <p class="text-gray-600 text-sm">200$ Valid For 1 Year In New/Unused Accounts</p>
+        </header>
+        
+        <!-- Secondary Navigation -->
+        <div class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div class="relative">
+                        <input type="text" id="search-input" placeholder="Search products..." 
+                               class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    </div>
+                    
+                    <div class="flex flex-wrap items-center gap-2 text-sm">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium account-premium">
+                            Premium
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium account-standard">
+                            Standard
+                        </span>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium account-basic">
+                            Basic
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Product 2 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                 <img src="https://miro.medium.com/v2/resize:fit:720/format:webp/1*rU7rYcEkTFsX-vCxRLxNJA.jpeg" alt="DO" width="600" height="600">
-           <path d="M17 2H7a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2zm0 18H7V4h10v16z"></path>
-                    <path d="M12 18a1 1 0 100-2 1 1 0 000 2z"></path>
+        
+        <main class="flex-grow">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <!-- Desktop Table View -->
+                <div class="hidden sm:block bg-white rounded-lg shadow-sm overflow-hidden">
+                    <div class="table-container">
+                        <table class="product-table min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                                        Product Name
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                                        Warranty Period
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b">
+                                        Account Type
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200" id="product-table-body">
+                                <!-- Product rows will be inserted here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Mobile Card View -->
+                <div class="sm:hidden space-y-4" id="product-card-container">
+                    <!-- Product cards will be inserted here by JavaScript -->
+                </div>
             </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Student pack</h3>
-                <div class="validity-tag validity-active">Warranty: 6 months</div>
-                <p class="text-gray-600 text-sm">Student Developer pack With 20+ Offers</p>
+        </main>
+        
+        <footer class="bg-white border-t border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <p class="text-sm text-gray-500 text-center">© 2023 Product Information Tracker. All rights reserved.</p>
             </div>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                <img src="https://www.famu.edu/students/student-resources/writing-resource-center/img/Grammarly_Logo_640x480.jpg" alt="DO" width="600" height="600">
-                    <path d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zm0 14H3V6h18v12z"></path>
-                    <path d="M9.41 16.41L8 15l4-4 4 4-1.41 1.41L12 13.83l-2.59 2.58z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Gramamrly</h3>
-                <div class="validity-tag validity-inactive">Warranty: 12 months</div>
-                <p class="text-gray-600 text-sm">Private Account With All Pro Features</p>
-            </div>
-        </div>
-
-                <!-- Product 11 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">Limited Time</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                 <img src="https://images.g2a.com/300x400/1x1x1/perplexity-pro-1-year-perplexity-key-global-i10000505518004/7940ab0749e94b04b2d413c4" alt="Girl in a jacket" width="600" height="600">
-             <path d="M15 2H9a2 2 0 00-2 2v16a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2zm-3 19c-.83 0-1.5-.67-1.5-1.5S11.17 18 12 18s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-4H9V4h6v13z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Perplexity PRO</h3>
-                <div class="validity-tag validity-active">Validity: 12/24 months</div>
-                <p class="text-gray-600 text-sm">Private Account . On Your Mail For 1 Year, Login Details Will Be Shared For 2 Years </p>
-            </div>
-        </div>
+        </footer>
     </div>
 
-        <!-- Product 4 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2M3xcXZ5FgoCsZsV5qiRm_PgP_mtx4FU-5g&s" alt="DO" width="600" height="600">
-             <path d="M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2zm0 9H5v-7h14v7zM7 9h10V7H7v2zm0-4h10V3H7v2z"></path>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Canva</h3>
-                <div class="validity-tag validity-active">Warranty: 12 months</div>
-                <p class="text-gray-600 text-sm">Invite Sent To Your Email WIth All Pro Features</p>
-            </div>
-        </div>
+    <script>
+        // Sample product data
+        const products = [
+            {
+                name: "MacBook Pro 16\"",
+                warrantyPeriod: "2 years",
+                accountType: "Premium"
+            },
+            {
+                name: "Samsung Galaxy S22",
+                warrantyPeriod: "1 year",
+                accountType: "Standard"
+            },
+            {
+                name: "Sony WH-1000XM4",
+                warrantyPeriod: "18 months",
+                accountType: "Premium"
+            },
+            {
+                name: "Dell XPS 15",
+                warrantyPeriod: "3 years",
+                accountType: "Premium"
+            },
+            {
+                name: "iPad Pro 12.9\"",
+                warrantyPeriod: "1 year",
+                accountType: "Standard"
+            },
+            {
+                name: "LG OLED C1 TV",
+                warrantyPeriod: "2 years",
+                accountType: "Premium"
+            },
+            {
+                name: "Bose QuietComfort Earbuds",
+                warrantyPeriod: "1 year",
+                accountType: "Basic"
+            },
+            {
+                name: "Dyson V11 Vacuum",
+                warrantyPeriod: "2 years",
+                accountType: "Standard"
+            },
+            {
+                name: "Canon EOS R5",
+                warrantyPeriod: "1 year",
+                accountType: "Premium"
+            },
+            {
+                name: "Nintendo Switch OLED",
+                warrantyPeriod: "1 year",
+                accountType: "Basic"
+            }
+        ];
 
-        <!-- Product 5 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                <img src="https://5.imimg.com/data5/SELLER/Default/2024/10/461248911/YT/XR/AQ/14076152/autodesk-software-500x500.jpg" alt="Girl in a jacket" width="600" height="600">
-            <path d="M12 3a9 9 0 00-9 9v7a2 2 0 002 2h14a2 2 0 002-2v-7a9 9 0 00-9-9zm0 2a7 7 0 017 7v7H5v-7a7 7 0 017-7z"></path>
-                    <path d="M12 12a2 2 0 100 4 2 2 0 000-4z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">AutoDESK</h3>
-                <div class="validity-tag validity-active">Validity: 12 months</div>
-                <p class="text-gray-600 text-sm">Any Of AutoDESK Product On Your Email</p>
-            </div>
-        </div>
+        // Function to get account type badge class
+        function getAccountBadgeClass(accountType) {
+            switch(accountType.toLowerCase()) {
+                case 'premium':
+                    return 'account-premium';
+                case 'standard':
+                    return 'account-standard';
+                default:
+                    return 'account-basic';
+            }
+        }
 
-        <!-- Product 6 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-               <img src="https://accountbot.io/static/groups/4ba22730-83d6-7f2e-eda2-c95744f38953/picture.png" alt="Girl in a jacket" width="600" height="600">
-            <path d="M15 2H9a2 2 0 00-2 2v16a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2zm0 18H9V4h6v16z"></path>
-                    <path d="M12 17a1 1 0 100-2 1 1 0 000 2z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Youtube Premium</h3>
-                <div class="validity-tag validity-inactive">Validity: 12 months</div>
-                <p class="text-gray-600 text-sm">On Your Email / We'll Share Login Details</p>
-            </div>
-        </div>
+        // Function to populate the product table and cards
+        function populateProducts(products) {
+            const tableBody = document.getElementById('product-table-body');
+            const cardContainer = document.getElementById('product-card-container');
+            
+            // Clear existing content
+            tableBody.innerHTML = '';
+            cardContainer.innerHTML = '';
+            
+            products.forEach(product => {
+                const accountBadgeClass = getAccountBadgeClass(product.accountType);
+                
+                // Create table row for desktop view
+                const tableRow = document.createElement('tr');
+                tableRow.className = 'product-row';
+                tableRow.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${product.name}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-500">${product.warrantyPeriod}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${accountBadgeClass}">
+                            ${product.accountType}
+                        </span>
+                    </td>
+                `;
+                tableBody.appendChild(tableRow);
+                
+                // Create card for mobile view
+                const card = document.createElement('div');
+                card.className = `bg-white rounded-lg shadow-sm p-4`;
+                card.innerHTML = `
+                    <div class="font-medium text-gray-900 mb-3">${product.name}</div>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div>
+                            <div class="text-xs text-gray-500">Warranty Period</div>
+                            <div>${product.warrantyPeriod}</div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500">Account Type</div>
+                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${accountBadgeClass}">
+                                ${product.accountType}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                cardContainer.appendChild(card);
+            });
+        }
 
-        <!-- Product 7 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNxB8YX3EXjt61QkJdZan9K7e3VvnjpLH7cP6rdKoKW1lmMFbskmaT_o90Oe0elPVUg1g&usqp=CAU" alt="Girl in a jacket" width="600" height="600">
-             <path d="M21 6h-7.59l-3-3H3a1 1 0 00-1 1v16a1 1 0 001 1h18a1 1 0 001-1V7a1 1 0 00-1-1zm-1 15H4V5h5.41l3 3H20v13z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Spotify Premium</h3>
-                <div class="validity-tag validity-active">Validity: 12 months</div>
-                <p class="text-gray-600 text-sm">On Your Email , Valid For 1 Year</p>
-            </div>
-        </div>
+        // Initialize the product display
+        populateProducts(products);
 
-        <!-- Product 8 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                <img src="https://logowik.com/content/uploads/images/notion1411.jpg" alt="Girl in a jacket" width="600" height="600">
-            <path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"></path>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Notion EDU Plus Plan</h3>
-                <div class="validity-tag validity-active">Validity: 12 months</div>
-                <p class="text-gray-600 text-sm">Crystal clear audio with comfortable fit and long battery life.</p>
-            </div>
-        </div>
-
-        <!-- Product 9 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                                <img src="https://www.citypng.com/public/uploads/preview/png-windows-11-black-logo-735811697038659s6dulrckbb.png" alt="Girl in a jacket" width="600" height="600">
-           <path d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zm0 14H3V6h18v12z"></path>
-                    <circle cx="8.5" cy="12" r="2.5"></circle>
-                    <circle cx="15.5" cy="12" r="2.5"></circle>
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Windows 10/11</h3>
-                <div class="validity-tag validity-inactive">Validity:  months</div>
-                <p class="text-gray-600 text-sm">Digital License Links To Your Microsoft Account</p>
-            </div>
-        </div>
-
-        <!-- Product 10 -->
-        <div class="product-card bg-white bg-opacity-90 rounded-lg overflow-hidden shadow-md relative">
-            <div class="warranty-badge warranty-active">In-STOCK</div>
-            <div class="h-56 bg-gray-100 flex items-center justify-center">
-                 <img src="https://rukminim2.flixcart.com/image/850/1000/xif0q/operating-system/9/o/v/ms-office-365-for-1-year-offcial-microsoft-plan-ms-office-365-original-imahavngpcafas8s.jpeg?q=90&crop=false" alt="Girl in a jacket" width="600" height="600">
-           <path d="M15 2H9a2 2 0 00-2 2v16a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2zm-3 19c-.83 0-1.5-.67-1.5-1.5S11.17 18 12 18s1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm3-4H9V4h6v13z"></path>           
-            </div>
-            <div class="p-5">
-                <h3 class="text-lg font-semibold text-gray-800 mb-1">Office 365 </h3>
-                <div class="validity-tag validity-active">Validity:  months</div>
-                <p class="text-gray-600 text-sm">Activate Office In 5 Devices ( PC ,Mac,Andoird )</p>
-            </div>
-        </div>
-    </div>
-
+        // Search functionality
+        const searchInput = document.getElementById('search-input');
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.accountType.toLowerCase().includes(searchTerm)
+            );
+            populateProducts(filteredProducts);
+        });
+    </script>
+</body>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -348,9 +312,4 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Icon">
     </a>
 </body>
-    
-
-    <footer class="mt-16 text-center text-gray-500 text-sm">
-        <p> Dasari Group </p>
-    </footer>
-</div>
+</html>
