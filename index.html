@@ -202,12 +202,12 @@
         // Function to get account type badge class
         function getAccountBadgeClass(accountType) {
             switch(accountType.toLowerCase()) {
-                case 'premium':
-                    return 'account-premium';
-                case 'standard':
-                    return 'account-standard';
+                case 'private':
+                    return 'account-private';
+                case 'semi-private':
+                    return 'account-semi-private';
                 default:
-                    return 'account-basic';
+                    return 'account-shared';
             }
         }
 
